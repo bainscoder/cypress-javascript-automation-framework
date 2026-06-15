@@ -1,0 +1,20 @@
+{
+  "name": "demo_cypress_js_project",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@shelex/cypress-allure-plugin": "^2.41.2",
+    "allure-commandline": "^2.42.1",
+    "cypress": "^15.17.0"
+  },
+  "dependencies": {
+    "dotenv": "^17.4.2"
+  }
+}
