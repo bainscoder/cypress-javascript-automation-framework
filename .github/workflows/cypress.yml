@@ -129,11 +129,18 @@ jobs:
       - name: Restore Previous Execution History
         run: |
           mkdir -p reports
-          if [ -f gh-pages-content/dashboard/execution-history.json ]; then
-            cp gh-pages-content/dashboard/execution-history.json reports/
-            echo "Previous history restored"
+          curl -L \
+          https://bainscoder.github.io/cypress-javascript-automation-framework/dashboard/execution-history.json \
+          -o reports/execution-history.json \
+          || echo "No previous history found"
+
+      - name: Verify Restored History
+        run: |
+          echo "===== HISTORY ====="
+          if [ -f reports/execution-history.json ]; then
+            cat reports/execution-history.json
           else
-            echo "No previous history found"
+            echo "History file missing"
           fi
 
       - name: Run Cypress Tests
