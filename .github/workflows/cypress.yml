@@ -105,6 +105,13 @@ jobs:
       - name: Checkout Repository
         uses: actions/checkout@v4
 
+      - name: Checkout gh-pages
+        uses: actions/checkout@v4
+        with:
+          ref: gh-pages
+          path: gh-pages-content
+        continue-on-error: true
+
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
@@ -118,6 +125,16 @@ jobs:
           echo "BASE_URL=${{ secrets.BASE_URL }}" >> .env
           echo "EMAIL=${{ secrets.EMAIL }}" >> .env
           echo "PASSWORD=${{ secrets.PASSWORD }}" >> .env
+
+      - name: Restore Previous Execution History
+        run: |
+          mkdir -p reports
+          if [ -f gh-pages-content/dashboard/execution-history.json ]; then
+            cp gh-pages-content/dashboard/execution-history.json reports/
+            echo "Previous history restored"
+          else
+            echo "No previous history found"
+          fi
 
       - name: Run Cypress Tests
         run: npm run cy:chrome
