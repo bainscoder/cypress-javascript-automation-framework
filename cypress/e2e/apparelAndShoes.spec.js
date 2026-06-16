@@ -11,4 +11,5 @@ describe('Apparel and Shoes Page Scripts', () => {
   it('Verify elements visible on apparel and shoes page',() => {
       pages.apparelAndShoes.verifyApparelAndShoesPageElements();
     });
+    
 });
