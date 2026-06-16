@@ -1,11 +1,31 @@
 const fs = require('fs');
 const path = require('path');
 
-const historyPath = path.join(
+const reportsDir = path.join(
   process.cwd(),
-  'reports',
+  'reports'
+);
+
+// Create reports folder if it doesn't exist
+if (!fs.existsSync(reportsDir)) {
+  fs.mkdirSync(
+    reportsDir,
+    { recursive: true }
+  );
+}
+
+const historyPath = path.join(
+  reportsDir,
   'execution-history.json'
 );
+
+// Create history file if it doesn't exist
+if (!fs.existsSync(historyPath)) {
+  fs.writeFileSync(
+    historyPath,
+    JSON.stringify([], null, 2)
+  );
+}
 
 function getHistory() {
 
